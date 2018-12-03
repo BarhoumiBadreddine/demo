@@ -4,14 +4,18 @@ import org.springframework.util.Assert;
 
 public class Card {
 
-	private final CardSuit cardSuit;
-	private final Integer cardNumber;
-	private final CardType cardType;
+	private CardSuit cardSuit;
+	private Integer cardNumber;
+	private CardType cardType;
+
+	public Card() {
+	}
 
 	public Card(CardSuit cardSuit, Integer cardNumber, CardType cardType) {
 		super();
 		Assert.notNull(cardSuit, "[Assertion failed] - 'cardSuit' argument is required; it must not be null");
 		Assert.notNull(cardNumber, "[Assertion failed] - 'cardNumber' argument is required; it must not be null");
+		Assert.notNull(cardType, "[Assertion failed] - 'cardType' argument is required; it must not be null");
 
 		this.cardSuit = cardSuit;
 		this.cardNumber = cardNumber;
@@ -22,13 +26,24 @@ public class Card {
 		return cardSuit;
 	}
 
+	public void setCardSuit(CardSuit cardSuit) {
+		this.cardSuit = cardSuit;
+	}
+
 	public Integer getCardNumber() {
 		return cardNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "Card [cardSuit=" + cardSuit + ", cardNumber=" + cardNumber + "]";
+	public void setCardNumber(Integer cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public CardType getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(CardType cardType) {
+		this.cardType = cardType;
 	}
 
 	@Override
@@ -59,8 +74,17 @@ public class Card {
 		return true;
 	}
 
-	public CardType getCardType() {
-		return cardType;
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Card [cardSuit=");
+		builder.append(cardSuit);
+		builder.append(", cardNumber=");
+		builder.append(cardNumber);
+		builder.append(", cardType=");
+		builder.append(cardType);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

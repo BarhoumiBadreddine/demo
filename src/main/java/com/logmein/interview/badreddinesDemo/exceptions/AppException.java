@@ -27,4 +27,15 @@ public class AppException extends RuntimeException {
 		this.message = message;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AppException [status=");
+		builder.append(status);
+		builder.append(", message=");
+		builder.append(message);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

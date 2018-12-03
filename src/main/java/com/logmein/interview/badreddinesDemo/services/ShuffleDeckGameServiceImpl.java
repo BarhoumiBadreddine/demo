@@ -10,7 +10,9 @@ import com.logmein.interview.badreddinesDemo.dao.model.GameDeckCard;
 @Service(value = "shuffleDeckGameService")
 public class ShuffleDeckGameServiceImpl implements ShuffleDeckGameService {
 	@Override
-	public void shuffleGameDeck(final List<GameDeckCard> list) {
-		Collections.shuffle(list);
+	public void shuffleGameDeck(final List<GameDeckCard> listGameDeckCard) {
+//		Collections.shuffle(listGameDeckCard);
+		Collections.sort(listGameDeckCard, new RandomComparator<>());
 	}
+	
 }

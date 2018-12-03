@@ -24,7 +24,7 @@ public enum CardSuit {
 				return value;
 			}
 		}
-		throw new IllegalStateException("There is no value with id[" + id + "]");
+		throw new IllegalStateException("There is no value with id[" + id + "]!");
 	}
 
 }
