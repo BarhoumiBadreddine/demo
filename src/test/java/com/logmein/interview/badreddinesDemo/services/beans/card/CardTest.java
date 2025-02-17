@@ -4,12 +4,10 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.testng.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class CardTest {
 
@@ -17,7 +15,7 @@ public class CardTest {
 	public void testCard() {
 		{
 			final Card actual = new Card();
-			assertThat(actual, notNullValue());
+			assertThat(actual).isNotNull();
 		}
 	}
 
@@ -30,8 +28,7 @@ public class CardTest {
 			new Card(cardSuit, cardNumber, cardType);
 			fail("Expected an IllegalArgumentException to be thrown!");
 		} catch (IllegalArgumentException expected) {
-			assertThat(expected.getMessage(),
-					equalTo("[Assertion failed] - 'cardSuit' argument is required; it must not be null"));
+			assertThat(expected.getMessage()).isEqualTo("[Assertion failed] - 'cardSuit' argument is required; it must not be null");
 		} catch (Exception unexpected) {
 			fail("Expected an IllegalArgumentException to be thrown! got : " + unexpected.getClass().getSimpleName());
 		}
@@ -42,8 +39,7 @@ public class CardTest {
 			new Card(cardSuit, cardNumber, cardType);
 			fail("Expected an IllegalArgumentException to be thrown!");
 		} catch (IllegalArgumentException expected) {
-			assertThat(expected.getMessage(),
-					equalTo("[Assertion failed] - 'cardNumber' argument is required; it must not be null"));
+			assertThat(expected.getMessage()).isEqualTo("[Assertion failed] - 'cardNumber' argument is required; it must not be null");
 		} catch (Exception unexpected) {
 			fail("Expected an IllegalArgumentException to be thrown! got : " + unexpected.getClass().getSimpleName());
 		}
@@ -54,8 +50,7 @@ public class CardTest {
 			new Card(cardSuit, cardNumber, cardType);
 			fail("Expected an IllegalArgumentException to be thrown!");
 		} catch (IllegalArgumentException expected) {
-			assertThat(expected.getMessage(),
-					equalTo("[Assertion failed] - 'cardType' argument is required; it must not be null"));
+			assertThat(expected.getMessage()).isEqualTo("[Assertion failed] - 'cardType' argument is required; it must not be null");
 		} catch (Exception unexpected) {
 			fail("Expected an IllegalArgumentException to be thrown! got : " + unexpected.getClass().getSimpleName());
 		}
@@ -65,27 +60,27 @@ public class CardTest {
 			final Integer cardNumber = 1;
 			final CardType cardType = CardType.ACE;
 			final Card actual = new Card(cardSuit, cardNumber, cardType);
-			assertThat(actual, notNullValue());
+			assertThat(actual).isNotNull();
 		}
 	}
 
 	@Test
 	public void testGettersAndSetters() {
-		assertThat(Card.class, hasValidGettersAndSetters());
+		assertThat(hasValidGettersAndSetters().matches(Card.class)).isTrue();
 	}
 
 	@Test
 	public void testEquals() {
-		assertThat(Card.class, hasValidBeanEqualsFor("cardSuit", "cardNumber"));
+		assertThat(hasValidBeanEqualsFor("cardSuit", "cardNumber").matches(Card.class)).isTrue();
 	}
 
 	@Test
 	public void testHashCode() {
-		assertThat(Card.class, hasValidBeanHashCodeFor("cardSuit", "cardNumber"));
+		assertThat(hasValidBeanHashCodeFor("cardSuit", "cardNumber").matches(Card.class)).isTrue();
 	}
 
 	@Test
 	public void testToString() {
-		assertThat(Card.class, hasValidBeanToString());
+		assertThat(hasValidBeanToString().matches(Card.class)).isTrue();
 	}
 }

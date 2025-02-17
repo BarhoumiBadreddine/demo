@@ -1,11 +1,9 @@
 package com.logmein.interview.badreddinesDemo.services.beans.card;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.testng.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.testng.annotations.Test;
-
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 public class CardSuitTest {
 
 	@Test
@@ -13,7 +11,7 @@ public class CardSuitTest {
 		final CardSuit[] values = CardSuit.values();
 		final int expected = 4;
 		final int actual = values.length;
-		assertThat(actual, equalTo(expected));
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
@@ -23,11 +21,11 @@ public class CardSuitTest {
 			switch (cardSuit) {
 			case CLUB:
 			case SPADE:
-				assertThat(cardSuit.getColor(), equalTo("BLACK"));
+				assertThat(cardSuit.getColor()).isEqualTo("BLACK");
 				break;
 			case DIAMOND:
 			case HEART:
-				assertThat(cardSuit.getColor(), equalTo("RED"));
+				assertThat(cardSuit.getColor()).isEqualTo("RED");
 				break;
 			default:
 				fail("Value not handled, please add it above!");
@@ -42,16 +40,16 @@ public class CardSuitTest {
 		for (CardSuit cardSuit : values) {
 			switch (cardSuit) {
 			case CLUB:
-				assertThat(cardSuit.getId(), equalTo(1));
+				assertThat(cardSuit.getId()).isEqualTo(1);
 				break;
 			case SPADE:
-				assertThat(cardSuit.getId(), equalTo(4));
+				assertThat(cardSuit.getId()).isEqualTo(4);
 				break;
 			case DIAMOND:
-				assertThat(cardSuit.getId(), equalTo(2));
+				assertThat(cardSuit.getId()).isEqualTo(2);
 				break;
 			case HEART:
-				assertThat(cardSuit.getId(), equalTo(3));
+				assertThat(cardSuit.getId()).isEqualTo(3);
 				break;
 			default:
 				fail("Value not handled, please add it above!");
@@ -66,7 +64,7 @@ public class CardSuitTest {
 			CardSuit.valueOf(7);
 			fail("Expected an IllegalStateException to be thrown!");
 		} catch (IllegalStateException expected) {
-			assertThat(expected.getMessage(), equalTo("There is no value with id[7]!"));
+			assertThat(expected.getMessage()).isEqualTo("There is no value with id[7]!");
 		} catch (Exception unexpected) {
 			fail("Expected an IllegalStateException to be thrown! got : " + unexpected.getClass().getSimpleName());
 		}
@@ -74,22 +72,22 @@ public class CardSuitTest {
 		{
 			final CardSuit expected = CardSuit.CLUB;
 			final CardSuit actual = CardSuit.valueOf(1);
-			assertThat(actual, equalTo(expected));
+			assertThat(actual).isEqualTo(expected);
 		}
 		{
 			final CardSuit expected = CardSuit.DIAMOND;
 			final CardSuit actual = CardSuit.valueOf(2);
-			assertThat(actual, equalTo(expected));
+			assertThat(actual).isEqualTo(expected);
 		}
 		{
 			final CardSuit expected = CardSuit.HEART;
 			final CardSuit actual = CardSuit.valueOf(3);
-			assertThat(actual, equalTo(expected));
+			assertThat(actual).isEqualTo(expected);
 		}
 		{
 			final CardSuit expected = CardSuit.SPADE;
 			final CardSuit actual = CardSuit.valueOf(4);
-			assertThat(actual, equalTo(expected));
+			assertThat(actual).isEqualTo(expected);
 		}
 
 	}

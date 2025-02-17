@@ -1,10 +1,9 @@
 package com.logmein.interview.badreddinesDemo.services.beans.card;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.testng.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class CardTypeTest {
 
@@ -13,7 +12,7 @@ public class CardTypeTest {
 		final CardType[] values = CardType.values();
 		final int expected = 5;
 		final int actual = values.length;
-		assertThat(actual, equalTo(expected));
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
@@ -22,24 +21,24 @@ public class CardTypeTest {
 		for (CardType cardType : values) {
 			switch (cardType) {
 			case ACE:
-				assertThat(cardType.getMin(), equalTo(1));
-				assertThat(cardType.getMax(), equalTo(1));
+				assertThat(cardType.getMin()).isEqualTo(1);
+				assertThat(cardType.getMax()).isEqualTo(1);
 				break;
 			case NUMBER:
-				assertThat(cardType.getMin(), equalTo(2));
-				assertThat(cardType.getMax(), equalTo(10));
+				assertThat(cardType.getMin()).isEqualTo(2);
+				assertThat(cardType.getMax()).isEqualTo(10);
 				break;
 			case JACK:
-				assertThat(cardType.getMin(), equalTo(11));
-				assertThat(cardType.getMax(), equalTo(11));
+				assertThat(cardType.getMin()).isEqualTo(11);
+				assertThat(cardType.getMax()).isEqualTo(11);
 				break;
 			case QUEEN:
-				assertThat(cardType.getMin(), equalTo(12));
-				assertThat(cardType.getMax(), equalTo(12));
+				assertThat(cardType.getMin()).isEqualTo(12);
+				assertThat(cardType.getMax()).isEqualTo(12);
 				break;
 			case KING:
-				assertThat(cardType.getMin(), equalTo(13));
-				assertThat(cardType.getMax(), equalTo(13));
+				assertThat(cardType.getMin()).isEqualTo(13);
+				assertThat(cardType.getMax()).isEqualTo(13);
 				break;
 			default:
 				fail("Value not handled, please add it above!");
@@ -56,12 +55,12 @@ public class CardTypeTest {
 			switch (cardType) {
 			case ACE:
 			case NUMBER:
-				assertThat(cardType.isFaceCard(), equalTo(false));
+				assertThat(cardType.isFaceCard()).isEqualTo(false);
 				break;
 			case JACK:
 			case QUEEN:
 			case KING:
-				assertThat(cardType.isFaceCard(), equalTo(true));
+				assertThat(cardType.isFaceCard()).isEqualTo(true);
 				break;
 			default:
 				fail("Value not handled, please add it above!");
