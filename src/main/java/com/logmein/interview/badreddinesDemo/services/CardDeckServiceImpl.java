@@ -105,8 +105,7 @@ public class CardDeckServiceImpl implements CardDeckService {
 		updateCardsIds(lstGameDeckCard, gameId);
 		this.gameDeckCardRepo.saveAll(lstGameDeckCard);
 		final int decksNumber = game.getDecksNumber();
-		game.setDecksNumber(decksNumber + 1);
-		this.gameRepo.save(game);
+		this.gameRepo.save(game.withDecksNumber(decksNumber + 1));
 	}
 
 	/**

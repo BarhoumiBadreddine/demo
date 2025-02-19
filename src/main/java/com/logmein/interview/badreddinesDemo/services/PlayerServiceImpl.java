@@ -138,10 +138,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 	GamePlayerCard create(final int gameId, final int cardSuit, final int cardNumber, final int cardId,
 			final int playerId) {
-		final GamePlayerCardPk gamePlayerCardPk = new GamePlayerCardPk();
-		gamePlayerCardPk.setGameId(gameId);
-		gamePlayerCardPk.setPlayerId(playerId);
-		gamePlayerCardPk.setCardId(cardId);
+		final GamePlayerCardPk gamePlayerCardPk = new GamePlayerCardPk(gameId, playerId, cardId);
 		final GamePlayerCard gamePlayerCard = new GamePlayerCard();
 		gamePlayerCard.setId(gamePlayerCardPk);
 		gamePlayerCard.setCardSuit(cardSuit);

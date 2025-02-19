@@ -67,7 +67,7 @@ public class GameServiceImpl implements GameService {
 			final Optional<GamePlayer> dbGamePlayer = this.gamePlayerRepo.findByIdPlayerId(player.getPlayerId());
 			if (dbGamePlayer.isPresent()) {
 				final GamePlayer foundGamePlayer = dbGamePlayer.get();
-				if (foundGamePlayer.getId().getGameId() == game.getGameId()) {
+				if (foundGamePlayer.getId().gameId() == game.getGameId()) {
 					throw new AppException(AppResponses.ENTITY_ALREADY_EXIST,
 							"Player[" + playerName + "] is already playing on this game[" + gameName + "]!");
 				} else {
@@ -102,8 +102,8 @@ public class GameServiceImpl implements GameService {
 			if (dbGamePlayer.isPresent()) {
 				final GamePlayer gamePlayer = dbGamePlayer.get();
 				final GamePlayerPk playerPk = gamePlayer.getId();
-				final int playerId = playerPk.getPlayerId();
-				final int playerGameId = playerPk.getGameId();
+				final int playerId = playerPk.playerId();
+				final int playerGameId = playerPk.gameId();
 				if (playerGameId == gameId) {
 					this.gamePlayerCardRepo.deleteByIdPlayerId(playerId);
 					this.gamePlayerRepo.deleteByIdPlayerId(playerId);
@@ -125,12 +125,8 @@ public class GameServiceImpl implements GameService {
 		Assert.notNull(game, "[Assertion failed] - 'game' argument is required; it must not be null");
 		final int gameId = game.getGameId();
 		final int maxPlayerOrder = getMaxPlayerOrder(gameId);
-		final GamePlayerPk gamePlayerPk = new GamePlayerPk();
-		gamePlayerPk.setPlayerId(player.getPlayerId());
-		gamePlayerPk.setGameId(gameId);
-		final GamePlayer _gamePlayer = new GamePlayer();
-		_gamePlayer.setId(gamePlayerPk);
-		_gamePlayer.setPlayerOrder(maxPlayerOrder + 1);
+		final GamePlayerPk gamePlayerPk = new GamePlayerPk(gameId, player.getPlayerId());
+		final GamePlayer _gamePlayer = GamePlayer.builder().id(gamePlayerPk).playerOrder(maxPlayerOrder + 1).build();
 		final GamePlayer gamePlayer = this.gamePlayerRepo.save(_gamePlayer);
 		return gamePlayer;
 	}
@@ -149,7 +145,16 @@ public class GameServiceImpl implements GameService {
 		}
 	}
 
-	
+	@Override
+	public Game findByGameId(int gameId)
+	{
+		final Optional<Game> opGame = this.gameRepo.findById(gameId);
+		if (opGame.isPresent()) {
+			return opGame.get();
+		} else {
+			throw new AppException(AppResponses.ENTITY_NOT_FOUND, "No Game with id[" + gameId + "]!");
+		}
+	};
 
 	/**
 	 * check if the player is already registered, if not register him/here.
@@ -175,8 +180,7 @@ public class GameServiceImpl implements GameService {
 	Game dbInsertGame(String gameName) {
 		Assert.hasText(gameName,
 				"[Assertion failed] - 'gameName' String argument must have text; it must not be null, empty, or blank");
-		final Game newGame = new Game();
-		newGame.setName(gameName);
+		final Game newGame = Game.builder().name(gameName).build();
 		return this.gameRepo.save(newGame);
 	}
 

@@ -10,4 +10,6 @@ public interface GameRepo extends CrudRepository<Game, Integer>{
 
 	List<Game> findByName(String gameName);
 
+	Game findByGameId(int gameId);
+
 }

@@ -16,6 +16,8 @@ public interface GameService {
 	boolean deleteGame(String gameName);
 
 	Iterable<Game> findAll();
+	
+	Game findByGameId(int gameId);
 
 	GamePlayer addPlayerToGame(String gameName, String playerName);
 

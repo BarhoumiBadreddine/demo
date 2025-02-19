@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import com.logmein.interview.badreddinesDemo.dao.model.GamePlayer;
+import com.logmein.interview.badreddinesDemo.dao.model.GamePlayerPk;
+
 public class CardTest {
 
 	@Test
@@ -21,6 +24,7 @@ public class CardTest {
 
 	@Test
 	public void testCard_$CardSuitIntegerCardType() {
+
 		try {
 			final CardSuit cardSuit = null;
 			final Integer cardNumber = null;
