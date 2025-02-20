@@ -5,7 +5,7 @@
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch"
     },
@@ -17,12 +17,12 @@
   ],
   "dependencyDashboard": true,
   "labels": ["dependencies"],
-  "prHourlyLimit": 2,
+  "prHourlyLimit": 1,
   "prConcurrentLimit": 10,
   "rangeStrategy": "bump",
   "timezone": "UTC",
   "schedule": [
-    "after 10pm every weekday",
+    "after 1pm every weekday",
     "before 5am every weekday",
     "every weekend"
   ]
